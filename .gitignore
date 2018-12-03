@@ -1,0 +1,5 @@
+# ignore executable
+day*
+
+# but unignore folders
+!*/

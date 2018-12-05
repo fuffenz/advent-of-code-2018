@@ -45,7 +45,7 @@ func getResults(s string) (int, int) {
 	p1 := len(tmp)
 
 	// part 2
-	ss := s
+	ss := tmp
 	minLen := len(tmp)
 	for c := 'A'; c <= 'Z'; c++ {
 		tmp := strings.Replace(ss, string(c), "", -1)

@@ -1,5 +1,9 @@
-# ignore executable
-day*
+*.py
 
+# ignore executable 
+day*
 # but unignore folders
 !*/
+
+.vscode*
+

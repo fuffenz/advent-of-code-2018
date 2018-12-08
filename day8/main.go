@@ -43,14 +43,15 @@ func getResults(data []int) (int, int, []int) {
 
 	if childnodes == 0 {
 		return total, metasum, rest[metacount:]
-	} else {
-		totvalue := 0
-		for i := 0; i < metacount; i++ {
-			v := rest[i]
-			if _, ok := values[v-1]; ok {
-				totvalue += values[v-1]
-			}
-		}
-		return total, totvalue, rest[metacount:]
 	}
+
+	totvalue := 0
+	for i := 0; i < metacount; i++ {
+		v := rest[i]
+		if _, ok := values[v-1]; ok {
+			totvalue += values[v-1]
+		}
+	}
+	return total, totvalue, rest[metacount:]
+
 }

@@ -38,7 +38,6 @@ func main() {
 	// 439 players; last marble is worth 71307 points
 
 	p1 := WinningScore(439, 71307)
-
 	p2 := WinningScore(439, 71307*100)
 
 	fmt.Printf("P1: %d, P2: %d\n", p1, p2)
@@ -50,7 +49,6 @@ func WinningScore(numberOfPlayers int, numberOfMarbles int) int {
 	highScore := 0
 	currentMarble := NewMarble(0)
 	for i := 0; i < numberOfMarbles; i++ {
-		p := i % numberOfPlayers
 		marbleValue++
 		if marbleValue%23 > 0 {
 			currentMarble = currentMarble.Next
@@ -62,6 +60,7 @@ func WinningScore(numberOfPlayers int, numberOfMarbles int) int {
 				currentMarble = currentMarble.Previous
 			}
 			removedMarble := currentMarble.RemoveNext()
+			p := i % numberOfPlayers
 			players[p] += (marbleValue + removedMarble.Value)
 			if players[p] > highScore {
 				highScore = players[p]

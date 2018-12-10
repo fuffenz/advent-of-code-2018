@@ -58,32 +58,38 @@ func parse(data []string) {
 		points = append(points, p)
 	}
 
-	areamin := math.MaxInt64
+	area := math.MaxInt64
+	prevArea := math.MaxInt64
 	second := 0
 	height := 0
 	width := 0
 	xOffset := 0
 	yOffset := 0
-	for i := 0; i < 15000; i++ {
+	for {
 		xMin := math.MaxInt64
 		yMin := math.MaxInt64
 		xMax := math.MinInt64
 		yMax := math.MinInt64
 		for _, p := range points {
-			xMin = min(xMin, p.X+i*p.Vx)
-			xMax = max(xMax, p.X+i*p.Vx)
-			yMin = min(yMin, p.Y+i*p.Vy)
-			yMax = max(yMax, p.Y+i*p.Vy)
+			xMin = min(xMin, p.X+second*p.Vx)
+			xMax = max(xMax, p.X+second*p.Vx)
+			yMin = min(yMin, p.Y+second*p.Vy)
+			yMax = max(yMax, p.Y+second*p.Vy)
 		}
-		if (xMax-xMin)*(yMax-yMin) < areamin {
-			areamin = (xMax - xMin) * (yMax - yMin)
+		area = (xMax - xMin) * (yMax - yMin)
+		if area < prevArea {
 			height = yMax - yMin
 			width = xMax - xMin
 			xOffset = xMin
 			yOffset = yMin
-			second = i
 		}
+		if area > prevArea {
+			break
+		}
+		prevArea = area
+		second++
 	}
+	second--
 	fmt.Printf("message readable at second %d\n", second)
 
 	out := make([][]rune, width+1)
